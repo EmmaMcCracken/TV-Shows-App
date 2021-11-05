@@ -26,25 +26,20 @@ export function EpisodeView(props: EpisodeProps): JSX.Element {
 
   return (
     <div className="episode">
-      <strong>
-        <p className="SeriesEpisode">
+      <p className="SeriesEpisode">
+        {" "}
+        <strong>
           S{("0" + episode.season).slice(-2)}E{("0" + episode.number).slice(-2)}
-        </p>
-      </strong>
-      <h2>
-        {episode.name} <br />
-      </h2>
+        </strong>{" "}
+      </p>
+      <h2>{episode.name}</h2>
+      <br />
       <img src={episode.image.medium} alt={""} /> <br />
       <p>
         {episode.summary
-          .replace("<p>", "")
-          .replace("</p>", "")
-          .replace("<p>", "")
-          .replace("</p>", "")
-          .replace("<p>", "")
-          .replace("</p>", "")
-          .replace("<br>", "")
-          .replace("<br>", "")}
+          .replace(/<p>/g, "")
+          .replace(/<\/p>/g, "")
+          .replace(/<br>/g, "")}
       </p>
     </div>
   );

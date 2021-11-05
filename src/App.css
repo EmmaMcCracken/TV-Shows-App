@@ -1,5 +1,6 @@
 body {
-  margin: 0 auto;
+  margin: 0 0;
+  width: 100%;
   background: #ffbe0b;
   display: flex;
   flex-direction: column;
@@ -7,8 +8,17 @@ body {
   text-align: center;
 }
 h1 {
-  color: #8338ec;
   font-size: 50px;
+  color: #1d6d1d;
+  border: #2c3112;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+header {
+  background-color: #fb5407dc;
+  width: 100%;
+  border-radius: 5px;
 }
 
 h2 {
