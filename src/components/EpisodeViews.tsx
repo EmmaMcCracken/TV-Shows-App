@@ -27,6 +27,12 @@ function EpisodeViews(): JSX.Element {
         onChange={(e) => handleSearchTermChange(e.target.value)}
         placeholder={"search term ..."}
       />
+      Search term is: {searchTerm} Loaded {episodes.length}
+      {"      "}
+      {episodes.length === 1 ? "bias" : "biases"} Showing{"      "}
+      {filteredEpisodes.length}{" "}
+      {filteredEpisodes.length === 1 ? "bias" : "biases"}
+      <br />
       <div className="episodes">{makeEpisodeElements(filteredEpisodes)}</div>
     </>
   );
