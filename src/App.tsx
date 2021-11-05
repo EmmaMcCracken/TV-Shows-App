@@ -1,6 +1,4 @@
-import episodes from "./episodes.json";
 import "./App.css";
-import { EpisodeView } from "./components/EpisodeView";
 import EpisodeViews from "./components/EpisodeViews";
 
 function App(): JSX.Element {
