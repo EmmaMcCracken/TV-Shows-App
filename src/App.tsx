@@ -5,7 +5,7 @@ function App(): JSX.Element {
   return (
     <>
       <header>
-        <h1>Game of Thrones Episodes</h1>
+        <h1>TV Show Episodes</h1>
       </header>
       <EpisodeViews />
       <footer>
