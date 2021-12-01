@@ -9,8 +9,6 @@ function EpisodeViews(): JSX.Element {
     setSearchTerm(txt);
   }
 
-  episodes.sort((a, b) => (a.name < b.name ? -1 : 1));
-
   const filteredEpisodes = episodes.filter(matchesSearchTerm);
 
   function matchesSearchTerm(episode: IEpisode) {
@@ -20,6 +18,32 @@ function EpisodeViews(): JSX.Element {
     );
   }
 
+  // myArray.find(x => x.id === '45').foo;
+  // function handleEpisodeSelected(selectedEpisodeID: number) {
+  // let newSearchTerm = searchTerm;
+  // if (episodes.find((x) => x.id === selectedEpisodeID)) {
+  // newSearchTerm = episodes.find((x) => x.id === selectedEpisodeID)?.name;
+  // }
+
+  // setSearchTerm(newSearchTerm);
+  // }
+
+  function handleEpisodeSelected(episodeID: string) {
+    // console.log(episodeID, "handleEpisodeSelected has been called");
+    //  set searchTerm to be the episode name of the episode which has been selected:
+    // foundEpisode = find in episodes the episode with id episodeID
+    const foundEpisode = episodes.find(
+      (episode) => episode.id === parseInt(episodeID)
+    );
+    // console.log(foundEpisode, "has been found.");
+    // set searchTerm to be foundEpisode.name
+    if (foundEpisode) {
+      setSearchTerm(foundEpisode.name);
+    }
+
+    // setSearchTerm()
+  }
+
   return (
     <>
       <input
@@ -27,6 +51,28 @@ function EpisodeViews(): JSX.Element {
         onChange={(e) => handleSearchTermChange(e.target.value)}
         placeholder={"search term ..."}
       />
+      <select
+        className="control"
+        onChange={(event) => handleEpisodeSelected(event.target.value)}
+        value={filteredEpisodes.length === 1 ? filteredEpisodes[0].id : ""}
+      >
+        {
+          //create the options within the select
+          filteredEpisodes.map((episode) => (
+            <option key={episode.id} value={episode.id}>
+              S{("0" + episode.season).slice(-2)}E
+              {("0" + episode.number).slice(-2)} {episode.name}
+            </option>
+          ))
+        }
+      </select>
+      <button
+        onClick={() => {
+          setSearchTerm("");
+        }}
+      >
+        Reset
+      </button>
       <br />
       {searchTerm !== "" && `Search term is: ${searchTerm}`}
       <br />
