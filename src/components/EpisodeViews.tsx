@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { EpisodeView, IEpisode } from "./EpisodeView";
-import episodes from "../episodes.json";
 
-function EpisodeViews(): JSX.Element {
+interface EpisodeViewsProps {
+  episodes: IEpisode[];
+}
+
+function EpisodeViews(props: EpisodeViewsProps): JSX.Element {
+  const { episodes } = props;
   const [searchTerm, setSearchTerm] = useState("");
 
   function handleSearchTermChange(txt: string) {
@@ -43,7 +47,12 @@ function EpisodeViews(): JSX.Element {
 
     // setSearchTerm()
   }
-
+  function makeEpisodeElements(episodes: IEpisode[]): JSX.Element[] {
+    const EpisodeElements = episodes.map((episode) => (
+      <EpisodeView episode={episode} key={episode.id} />
+    ));
+    return EpisodeElements;
+  }
   return (
     <>
       <input
@@ -88,10 +97,4 @@ function EpisodeViews(): JSX.Element {
   );
 }
 
-function makeEpisodeElements(episodes: IEpisode[]): JSX.Element[] {
-  const EpisodeElements = episodes.map((episode) => (
-    <EpisodeView episode={episode} key={episode.id} />
-  ));
-  return EpisodeElements;
-}
 export default EpisodeViews;

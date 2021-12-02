@@ -34,12 +34,13 @@ export function EpisodeView(props: EpisodeProps): JSX.Element {
       </p>
       <h2>{episode.name}</h2>
       <br />
-      <img src={episode.image.medium} alt={""} /> <br />
+      <img src={episode.image && episode.image.medium} alt={""} /> <br />
       <p>
-        {episode.summary
-          .replace(/<p>/g, "")
-          .replace(/<\/p>/g, "")
-          .replace(/<br>/g, "")}
+        {episode.summary &&
+          episode.summary
+            .replace(/<p>/g, "")
+            .replace(/<\/p>/g, "")
+            .replace(/<br>/g, "")}
       </p>
     </div>
   );
