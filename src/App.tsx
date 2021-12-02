@@ -10,15 +10,15 @@ function App(): JSX.Element {
   const [showID, setShowID] = useState<string>("82");
   const [episodes, setEpisodes] = useState<IEpisode[]>([]);
   const showList: ShowProps[] = tvShows;
-  async function getData() {
-    const response = await fetch(
-      `https://api.tvmaze.com/shows/${showID}/episodes`
-    );
-    const episodes: IEpisode[] = await response.json();
-    setEpisodes(episodes);
-  }
 
   useEffect(() => {
+    async function getData() {
+      const response = await fetch(
+        `https://api.tvmaze.com/shows/${showID}/episodes`
+      );
+      const episodes: IEpisode[] = await response.json();
+      setEpisodes(episodes);
+    }
     getData();
   }, [showID]);
 
