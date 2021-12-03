@@ -50,8 +50,10 @@ export default function ShowPage({
 }: ShowPageProps): JSX.Element {
   return (
     <div className="episodes">
-      <ShowView tvShow={tvShows[0]} setShowID={setShowID} />
-      {/* {tvShows.map((show)=> <ShowView tvShow={show} setShowID ={setShowID} />} */}
+      {/* <ShowView tvShow={tvShows[0]} /> */}
+      {tvShows.map((show) => (
+        <ShowView key={show.id} tvShow={show} setShowID={setShowID} />
+      ))}
     </div>
   );
 }
