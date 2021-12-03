@@ -5,9 +5,10 @@ import { IEpisode } from "./components/EpisodeView";
 import tvShows from "./shows.json";
 import ShowSelector from "./components/ShowSelector";
 import ShowProps from "./components/ShowProps";
+import ShowPage from "./components/ShowPage";
 
 function App(): JSX.Element {
-  const [showID, setShowID] = useState<string>("82");
+  const [showID, setShowID] = useState<string>("");
   const [episodes, setEpisodes] = useState<IEpisode[]>([]);
   const showList: ShowProps[] = tvShows;
 
@@ -19,7 +20,7 @@ function App(): JSX.Element {
       const episodes: IEpisode[] = await response.json();
       setEpisodes(episodes);
     }
-    getData();
+    showID !== "" && getData();
   }, [showID]);
 
   return (
@@ -27,12 +28,15 @@ function App(): JSX.Element {
       <header>
         <h1>TV Show Episodes</h1>
       </header>
-      <ShowSelector
-        showID={showID.toString()}
-        setShowID={setShowID}
-        tvShows={showList}
-      />
-      <EpisodeViews episodes={episodes} />
+      {showID === "" && <ShowPage tvShows={showList} setShowID={setShowID} />}
+      {showID !== "" && (
+        <ShowSelector
+          showID={showID.toString()}
+          setShowID={setShowID}
+          tvShows={showList}
+        />
+      )}
+      {showID !== "" && <EpisodeViews episodes={episodes} />}
       <footer>
         Data sourced from <a href="https://tvmaze.com/">TVMaze.com</a>.
       </footer>

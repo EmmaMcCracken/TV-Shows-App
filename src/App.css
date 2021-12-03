@@ -69,6 +69,18 @@ p {
   color: #dcdcdd;
 }
 
+.show {
+  background: #4c5c689a;
+  width: 250px;
+  border-radius: 5px;
+  padding: 20px;
+  padding-top: 5px;
+  margin: 10px;
+  position: relative;
+  text-align: center;
+  color: #dcdcdd;
+}
+
 .group,
 .type {
   color: white;
