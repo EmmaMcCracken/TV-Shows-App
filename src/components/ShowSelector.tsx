@@ -16,9 +16,6 @@ export default function ShowSelector(props: ShowSelectorProps): JSX.Element {
       value={props.showID}
       onChange={(e) => handleSelectShow(e.target.value)}
     >
-      <option value="82" selected>
-        Game of Thrones
-      </option>
       {props.tvShows
         .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
         .map((show) => (

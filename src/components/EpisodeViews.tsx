@@ -1,51 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { EpisodeView, IEpisode } from "./EpisodeView";
 
 interface EpisodeViewsProps {
   episodes: IEpisode[];
+  setShowID: (id: string) => void;
 }
 
 function EpisodeViews(props: EpisodeViewsProps): JSX.Element {
   const { episodes } = props;
   const [searchTerm, setSearchTerm] = useState("");
+  const [filteredEpisodes, setFilteredEpisodes] =
+    useState<IEpisode[]>(episodes);
+
+  useEffect(() => {
+    setFilteredEpisodes(episodes);
+    setSearchTerm("");
+  }, [episodes]);
+
+  console.log(
+    "EpisodeViews has been run and filteredEpisodes is ",
+    filteredEpisodes
+  );
 
   function handleSearchTermChange(txt: string) {
     setSearchTerm(txt);
-  }
-
-  const filteredEpisodes = episodes.filter(matchesSearchTerm);
-
-  function matchesSearchTerm(episode: IEpisode) {
-    return (
-      episode.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      episode.summary.toLowerCase().includes(searchTerm.toLowerCase())
+    setFilteredEpisodes(
+      episodes.filter((episode) => {
+        return (
+          episode.name.toLowerCase().includes(txt.toLowerCase()) ||
+          episode.summary.toLowerCase().includes(txt.toLowerCase())
+        );
+      })
     );
   }
 
-  // myArray.find(x => x.id === '45').foo;
-  // function handleEpisodeSelected(selectedEpisodeID: number) {
-  // let newSearchTerm = searchTerm;
-  // if (episodes.find((x) => x.id === selectedEpisodeID)) {
-  // newSearchTerm = episodes.find((x) => x.id === selectedEpisodeID)?.name;
-  // }
-
-  // setSearchTerm(newSearchTerm);
-  // }
-
   function handleEpisodeSelected(episodeID: string) {
-    // console.log(episodeID, "handleEpisodeSelected has been called");
-    //  set searchTerm to be the episode name of the episode which has been selected:
-    // foundEpisode = find in episodes the episode with id episodeID
     const foundEpisode = episodes.find(
       (episode) => episode.id === parseInt(episodeID)
     );
-    // console.log(foundEpisode, "has been found.");
-    // set searchTerm to be foundEpisode.name
-    if (foundEpisode) {
-      setSearchTerm(foundEpisode.name);
-    }
 
-    // setSearchTerm()
+    if (foundEpisode) {
+      setFilteredEpisodes([foundEpisode]);
+    }
   }
   function makeEpisodeElements(episodes: IEpisode[]): JSX.Element[] {
     const EpisodeElements = episodes.map((episode) => (
@@ -63,7 +59,11 @@ function EpisodeViews(props: EpisodeViewsProps): JSX.Element {
       <select
         className="control"
         onChange={(event) => handleEpisodeSelected(event.target.value)}
-        value={filteredEpisodes.length === 1 ? filteredEpisodes[0].id : ""}
+        value={
+          filteredEpisodes.length === 1
+            ? filteredEpisodes[0].id
+            : "Select an episode"
+        }
       >
         {
           //create the options within the select
@@ -78,9 +78,10 @@ function EpisodeViews(props: EpisodeViewsProps): JSX.Element {
       <button
         onClick={() => {
           setSearchTerm("");
+          setFilteredEpisodes(episodes);
         }}
       >
-        Reset
+        Clear filter
       </button>
       <br />
       {searchTerm !== "" && `Search term is: ${searchTerm}`}
@@ -92,6 +93,13 @@ function EpisodeViews(props: EpisodeViewsProps): JSX.Element {
       {`Showing      ${filteredEpisodes.length} ${
         filteredEpisodes.length === 1 ? "episode" : "episodes"
       }`}
+      <button
+        onClick={() => {
+          props.setShowID("");
+        }}
+      >
+        Return to list of shows
+      </button>
       <div className="episodes">{makeEpisodeElements(filteredEpisodes)}</div>
     </>
   );

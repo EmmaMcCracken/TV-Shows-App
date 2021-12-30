@@ -26,17 +26,20 @@ function App(): JSX.Element {
   return (
     <>
       <header>
-        <h1>TV Show Episodes</h1>
+        <h1>TV Shows</h1>
       </header>
-      {showID === "" && <ShowPage tvShows={showList} setShowID={setShowID} />}
-      {showID !== "" && (
+
+      {
         <ShowSelector
           showID={showID.toString()}
           setShowID={setShowID}
           tvShows={showList}
         />
+      }
+      {showID === "" && <ShowPage tvShows={showList} setShowID={setShowID} />}
+      {showID !== "" && (
+        <EpisodeViews episodes={episodes} setShowID={setShowID} />
       )}
-      {showID !== "" && <EpisodeViews episodes={episodes} />}
       <footer>
         Data sourced from <a href="https://tvmaze.com/">TVMaze.com</a>.
       </footer>

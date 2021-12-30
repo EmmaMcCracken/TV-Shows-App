@@ -118,3 +118,6 @@ input {
   /* border-radius: 10px; */
   border: thick solid #3535eb;
 }
+.tvShowTitle {
+  cursor: pointer;
+}

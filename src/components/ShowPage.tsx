@@ -13,7 +13,12 @@ interface ShowViewProps {
 function ShowView({ tvShow, setShowID }: ShowViewProps): JSX.Element {
   return (
     <div key={tvShow.id} className="episode">
-      <h3 onClick={() => setShowID(tvShow.id.toString())}>{tvShow.name}</h3>
+      <h3
+        className="tvShowTitle"
+        onClick={() => setShowID(tvShow.id.toString())}
+      >
+        {tvShow.name}
+      </h3>
       {tvShow.image && (
         <img
           src={tvShow.image.medium ? tvShow.image.medium : undefined}
