@@ -17,11 +17,6 @@ function EpisodeViews(props: EpisodeViewsProps): JSX.Element {
     setSearchTerm("");
   }, [episodes]);
 
-  console.log(
-    "EpisodeViews has been run and filteredEpisodes is ",
-    filteredEpisodes
-  );
-
   function handleSearchTermChange(txt: string) {
     setSearchTerm(txt);
     setFilteredEpisodes(
@@ -54,17 +49,18 @@ function EpisodeViews(props: EpisodeViewsProps): JSX.Element {
       <input
         value={searchTerm}
         onChange={(e) => handleSearchTermChange(e.target.value)}
-        placeholder={"search term ..."}
+        placeholder={"Search term ..."}
       />
       <select
         className="control"
         onChange={(event) => handleEpisodeSelected(event.target.value)}
-        value={
-          filteredEpisodes.length === 1
-            ? filteredEpisodes[0].id
-            : "Select an episode"
-        }
+        placeholder={"Select an episode"}
       >
+        {
+          <option value="" key="placeholder" disabled selected>
+            Select an episode
+          </option>
+        }
         {
           //create the options within the select
           filteredEpisodes.map((episode) => (
@@ -75,14 +71,16 @@ function EpisodeViews(props: EpisodeViewsProps): JSX.Element {
           ))
         }
       </select>
-      <button
-        onClick={() => {
-          setSearchTerm("");
-          setFilteredEpisodes(episodes);
-        }}
-      >
-        Clear filter
-      </button>
+      {(searchTerm !== "" || filteredEpisodes.length < episodes.length) && (
+        <button
+          onClick={() => {
+            setSearchTerm("");
+            setFilteredEpisodes(episodes);
+          }}
+        >
+          Clear filter
+        </button>
+      )}
       <br />
       {searchTerm !== "" && `Search term is: ${searchTerm}`}
       <br />
