@@ -22,8 +22,10 @@ function EpisodeViews(props: EpisodeViewsProps): JSX.Element {
     setFilteredEpisodes(
       episodes.filter((episode) => {
         return (
-          episode.name.toLowerCase().includes(txt.toLowerCase()) ||
-          episode.summary.toLowerCase().includes(txt.toLowerCase())
+          (episode.name &&
+            episode.name.toLowerCase().includes(txt.toLowerCase())) ||
+          (episode.summary &&
+            episode.summary.toLowerCase().includes(txt.toLowerCase()))
         );
       })
     );

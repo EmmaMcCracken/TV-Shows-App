@@ -19,6 +19,7 @@ function App(): JSX.Element {
       );
       const episodes: IEpisode[] = await response.json();
       setEpisodes(episodes);
+      console.log("episodes: ", episodes);
     }
     showID !== "" && getData();
   }, [showID]);
