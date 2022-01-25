@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { IEpisode } from "./components/EpisodeView";
 import tvShows from "./shows.json";
 import ShowSelector from "./components/ShowSelector";
-import ShowProps from "./components/ShowProps";
+import ShowProps from "./utils/ShowProps";
 import ShowPage from "./components/ShowPage";
 
 function App(): JSX.Element {

@@ -1,4 +1,4 @@
-import ShowProps from "./ShowProps";
+import ShowProps from "../utils/ShowProps";
 
 interface ShowSelectorProps {
   showID: string;
