@@ -24,17 +24,14 @@ export default function ShowPage({
     setFilteredShows(
       tvShows.filter((show) => {
         return (
-          show.genres &&
-          show.genres.filter((genre) =>
-            genre.toLowerCase().includes(txt.toLowerCase())
-          ).length > 0) || (
-            show.name &&
-            show.name.toLowerCase().includes(txt.toLowerCase())
-          ) || (
-            show.summary &&
-            show.summary.toLowerCase().includes(txt.toLowerCase())
-          )
-          ;
+          (show.genres &&
+            show.genres.filter((genre) =>
+              genre.toLowerCase().includes(txt.toLowerCase())
+            ).length > 0) ||
+          (show.name && show.name.toLowerCase().includes(txt.toLowerCase())) ||
+          (show.summary &&
+            show.summary.toLowerCase().includes(txt.toLowerCase()))
+        );
       })
     );
 
@@ -51,13 +48,13 @@ export default function ShowPage({
       Show search term: {showSearchTerm}
       <div className="episodes">
         {/* <ShowView tvShow={tvShows[0]} /> */}
-        {(filteredShows.length === 0 && showSearchTerm === "")
+        {filteredShows.length === 0 && showSearchTerm === ""
           ? tvShows.map((show) => (
-            <ShowView key={show.id} tvShow={show} setShowID={setShowID} />
-          ))
+              <ShowView key={show.id} tvShow={show} setShowID={setShowID} />
+            ))
           : filteredShows.map((show) => (
-            <ShowView key={show.id} tvShow={show} setShowID={setShowID} />
-          ))}
+              <ShowView key={show.id} tvShow={show} setShowID={setShowID} />
+            ))}
       </div>
     </>
   );
