@@ -34,8 +34,6 @@ export default function ShowPage({
         );
       })
     );
-
-    console.log(filteredShows);
   }
 
   return (
@@ -50,11 +48,11 @@ export default function ShowPage({
         {/* <ShowView tvShow={tvShows[0]} /> */}
         {filteredShows.length === 0 && showSearchTerm === ""
           ? tvShows.map((show) => (
-              <ShowView key={show.id} tvShow={show} setShowID={setShowID} />
-            ))
+            <ShowView key={show.id} tvShow={show} setShowID={setShowID} />
+          ))
           : filteredShows.map((show) => (
-              <ShowView key={show.id} tvShow={show} setShowID={setShowID} />
-            ))}
+            <ShowView key={show.id} tvShow={show} setShowID={setShowID} />
+          ))}
       </div>
     </>
   );
